@@ -19,3 +19,20 @@ type Component interface {
 	Render() Element
 }
 ```
+
+To turn any existing Go type into an `html.Component` simply add a `Render()` method.
+For example:
+
+```go
+func (mt *MyType) Render() html.Element {
+	return html.Element{
+		Tag: "button",
+		Attrs: html.Attrs{
+			"class": "bg-red-700 drop-shadow rounded-lg p-4",
+		},
+		Children: []html.Element{
+			html.Text(mt.Name),
+		},
+	}
+}
+```
